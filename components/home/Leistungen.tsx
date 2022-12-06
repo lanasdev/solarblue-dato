@@ -2,7 +2,7 @@ import Container from 'components/Container'
 import Link from 'next/link'
 import { BatteryCharging, Lightning, Sun } from 'phosphor-react'
 
-const LeistungenData = [
+const leistungen = [
   {
     title: 'Photovoltaik',
     description:
@@ -30,29 +30,29 @@ const LeistungenData = [
 ]
 
 type LeistungenProps = {
-  leistungen?: any
+  leistungenData?: any
 }
 
-export default function Leistungen({ leistungen }: LeistungenProps) {
+export default function Leistungen({ leistungenData }: LeistungenProps) {
   return (
     <Container>
       <div className="pt-24">
         {/* <pre className="whitespace-pre border-lightBlue py-16">
         {JSON.stringify(leistungen, null, 2)}
       </pre> */}
-        <h3 className="pb-16 text-2xl font-semibold">Leistungen</h3>
+        <h3 className="pb-16 text-2xl font-semibold">{leistungenData.titel}</h3>
         <div className="flex flex-col gap-16 md:flex-row">
-          {LeistungenData.map((item, index) => (
+          {leistungenData.leistungenliste.map((item, index) => (
             <div key={item.slug} className="flex w-full flex-col md:w-1/3">
               {/* <span id="icon" className=" text-lightBlue">
               {item.icon}
             </span> */}
               <span id="icon" className=" text-lightBlue">
-                {LeistungenData[index].icon}
+                {leistungen[index].icon}
               </span>
-              <h3 className="mt-4 text-xl font-semibold">{item.title}</h3>
+              <h3 className="mt-4 text-xl font-semibold">{item.titel}</h3>
               <p className="mt-4 text-gray-500 line-clamp-4">
-                {item.description}
+                {item.beschreibung}
               </p>
               <Link
                 href={`/leistung/${item.slug}`}

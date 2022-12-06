@@ -1,6 +1,6 @@
 import Container from 'components/Container'
 
-const Fakten = () => {
+const Fakten = ({ faktenData }) => {
   const DetailsData = [
     {
       id: 1,
@@ -22,10 +22,10 @@ const Fakten = () => {
   return (
     <Container className="mx-auto pt-24 ">
       <div className="flex flex-col gap-12 md:flex-row md:justify-between">
-        {DetailsData.map((item) => (
+        {faktenData.fakten.map((item) => (
           <div key={item.id} className="flex flex-col">
-            <span className="text-6xl text-lightBlue">{item.number}</span>
-            <p className="text-md max-w-xs">{item.text}</p>
+            <span className="text-6xl text-lightBlue">{item.text}</span>
+            <p className="text-md max-w-xs">{item.beschreibung}</p>
           </div>
         ))}
       </div>

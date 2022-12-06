@@ -1,21 +1,20 @@
 // import SectionContainer from "components/SectionContainer";
 import Contactform from 'components/Contactform'
+import Container from 'components/Container'
 import { Envelope, Phone } from 'phosphor-react'
 
-import Container from 'components/Container'
-
-const Contact = () => {
+const Contact = ({ contactData }) => {
   return (
     <div className=" bg-lightBlue px-4 pb-16 text-black" id="kontakt">
       <Container>
         <div className="flex flex-col items-stretch justify-between pt-16 md:flex-row ">
           <div className="flex-1 md:pr-16">
             <h3 className="max-w-xs pb-16 text-2xl font-semibold">
-              Interesse geweckt?
+              {contactData.titel || 'Interesse geweckt?'}
             </h3>
             <p className="leading-6">
-              Dann kontaktieren Sie uns doch einfach und wir melden uns so
-              schnell wie möglich zurück!
+              {contactData.beschreibung ||
+                'Dann kontaktieren Sie uns doch einfach und wir melden uns so schnell wie möglich zurück!'}
             </p>
             <div className="flex flex-col items-start justify-start gap-4 pt-14">
               <p>

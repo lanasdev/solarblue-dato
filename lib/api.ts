@@ -82,6 +82,29 @@ export const getHome = async (preview: boolean) => {
               text
             }
           }
+          ... on BlogsektionRecord {
+            id
+            titel
+            beschreibung
+            blogliste {
+              titel
+              beschreibung
+              author {
+                name
+                profilbild {
+                  responsiveImage(imgixParams: { auto: format }) {
+                    ...responsiveImageFragment
+                  }
+                }
+              }
+              slug
+              bild {
+                responsiveImage(imgixParams: { auto: format }) {
+                  ...responsiveImageFragment
+                }
+              }
+            }
+          }
           ... on KontaktsektionRecord {
             id
             titel

@@ -1,5 +1,6 @@
 import Contact from 'components/Contact'
 import Container from 'components/Container'
+import Blog from 'components/home/Blog'
 import CTABreit from 'components/home/CTABreit'
 import Fakten from 'components/home/Fakten'
 import Hero from 'components/home/Hero'
@@ -67,8 +68,8 @@ export default function IndexRoute({ subscription }) {
           <div key={i.__typename}>{switchComponent(i)}</div>
         ))}
       </div>
-
-      {/* <pre>
+      {/* 
+      <pre>
         <code>{JSON.stringify(data, null, 2)}</code>
       </pre> */}
     </Layout>
@@ -78,23 +79,23 @@ export default function IndexRoute({ subscription }) {
 const switchComponent = (i) => {
   switch (i.__typename) {
     case 'HeroRecord':
-      return <Hero />
+      return <Hero heroData={i} />
     case 'LeistungsektionRecord':
-      return <Leistungen />
+      return <Leistungen leistungenData={i} />
     case 'TeamsektionRecord':
-      return <Team />
+      return <Team teamData={i} />
     case 'FaktensektionRecord':
-      return <Fakten />
+      return <Fakten faktenData={i} />
     case 'ProjektesektionRecord':
-      return <Referenzen />
+      return <Referenzen referenzenData={i} />
     case 'CtabreitRecord':
-      return <CTABreit />
+      return <CTABreit ctabreitData={i} />
     case 'TestimonialsektionRecord':
-      return <Testimonials />
+      return <Testimonials testimonialsData={i} />
     case 'BlogsektionRecord':
-      return <div className=""> BlogsektionRecord</div>
+      return <Blog blogData={i} />
     case 'KontaktsektionRecord':
-      return <Contact />
+      return <Contact contactData={i} />
 
     default:
       return null

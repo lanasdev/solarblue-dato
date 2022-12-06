@@ -4,24 +4,23 @@ import Link from 'next/link'
 import { Image, ResponsiveImageType } from 'react-datocms'
 
 interface CoverImageProps {
-  data: ResponsiveImageType
-  slug?: string
-  image: any
+  image: ResponsiveImageType
+  href?: string
   priority?: boolean
 }
 
 export default function CoverImage(props: CoverImageProps) {
-  const { data, slug, image, priority } = props
+  const { image, href, priority } = props
 
   const ThisImage = () => (
     <div
       className={clsx('shadow-small', {
-        'transition-shadow duration-200 hover:shadow-medium': slug,
+        'transition-shadow duration-200 hover:shadow-medium': href,
       })}
     >
       <Image
         className="h-auto w-full"
-        data={data}
+        data={image}
         sizes="100vw"
         priority={priority}
       />
@@ -30,12 +29,12 @@ export default function CoverImage(props: CoverImageProps) {
 
   return (
     <div className="sm:mx-0">
-      {slug ? (
-        <Link href={`/posts/${slug}`} aria-label={slug}>
-          {image}
+      {href ? (
+        <Link href={href} aria-label={href}>
+          <ThisImage />
         </Link>
       ) : (
-        image
+        <ThisImage />
       )}
     </div>
   )

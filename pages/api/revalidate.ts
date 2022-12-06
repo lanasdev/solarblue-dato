@@ -1,5 +1,5 @@
 // pages/api/revalidate.js
-import type { NextApiRequest, NextApiResponse } from "next";
+import type { NextApiRequest, NextApiResponse } from 'next'
 
 export default async function handler(
   req: NextApiRequest,
@@ -7,21 +7,21 @@ export default async function handler(
 ) {
   // Check for secret to confirm this is a valid request
   if (req.query.secret !== process.env.DATOCMS_PREVIEW_SECRET) {
-    return res.status(401).json({ message: "Invalid token" });
+    return res.status(401).json({ message: 'Invalid token' })
   }
   if (!req.query.path) {
-    return res.status(401).json({ message: "Invalid path" });
+    return res.status(401).json({ message: 'Invalid path' })
   }
 
   try {
     // this should be the actual path not a rewritten path
     // e.g. for "/blog/[slug]" this should be "/blog/post-1"
-    await res.revalidate("/");
-    await res.revalidate(req.query.path as string);
-    return res.json({ revalidated: true });
+    await res.revalidate('/')
+    await res.revalidate(req.query.path as string)
+    return res.json({ revalidated: true })
   } catch (err) {
     // If there was an error, Next.js will continue
     // to show the last successfully generated page
-    return res.status(500).json({ message: "Error revalidating" });
+    return res.status(500).json({ message: 'Error revalidating' })
   }
 }
