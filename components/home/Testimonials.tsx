@@ -1,4 +1,5 @@
-import cn from 'classnames'
+import clsx from 'clsx'
+import Container from 'components/Container'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -31,14 +32,14 @@ const Testimonials = () => {
   ]
 
   return (
-    <section className="pt-24">
+    <Container className="py-24">
       <h3 className="pb-16 text-2xl font-semibold">Was unsere Kunden sagen</h3>
       <div className="flex flex-col gap-12  md:flex-row">
         {TestimonialsData.map((item) => (
           <TestimonialItem key={item.id} name={item.name} text={item.text} />
         ))}
       </div>
-    </section>
+    </Container>
   )
 }
 

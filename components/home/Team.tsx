@@ -1,10 +1,11 @@
+import Container from 'components/Container'
 import TeamImage from 'img/pexels-kindel-media-9875405.jpg'
 import Image from 'next/image'
 import Link from 'next/link'
 
 const Team = () => {
   return (
-    <>
+    <Container>
       <section className="flex w-full flex-col pt-32 md:flex-row md:gap-16">
         <Image
           src={TeamImage}
@@ -26,42 +27,8 @@ const Team = () => {
           </p>
         </div>
       </section>
-      <Details />
-    </>
+    </Container>
   )
 }
 
 export default Team
-
-const Details = () => {
-  const DetailsData = [
-    {
-      id: 1,
-      text: 'Festangestellte Mitarbeiter',
-      number: 7,
-    },
-    {
-      id: 2,
-      text: 'Jahre Erfahrung',
-      number: 16,
-    },
-    {
-      id: 3,
-      text: 'GWh haben unsere Solaranlagen generiert',
-      number: 369,
-    },
-  ]
-
-  return (
-    <section className="mx-auto pt-24 ">
-      <div className="flex flex-col gap-12 md:flex-row md:justify-between">
-        {DetailsData.map((item) => (
-          <div key={item.id} className="flex flex-col">
-            <span className="text-6xl text-lightBlue">{item.number}</span>
-            <p className="text-md max-w-xs">{item.text}</p>
-          </div>
-        ))}
-      </div>
-    </section>
-  )
-}

@@ -1,109 +1,102 @@
-import IndexPage from 'components/IndexPage'
-import { apiVersion, dataset, projectId } from 'lib/sanity.api'
-import {
-  type Homepage,
-  type Leistung,
-  type Post,
-  type Settings,
-  homepageQuery,
-  indexQuery,
-  leistungenQuery,
-  settingsQuery,
-} from 'lib/sanity.queries'
-import type { GetStaticProps, InferGetStaticPropsType } from 'next'
-import { createClient } from 'next-sanity'
-import { PreviewSuspense } from 'next-sanity/preview'
-import { lazy } from 'react'
+import Contact from 'components/Contact'
+import Container from 'components/Container'
+import CTABreit from 'components/home/CTABreit'
+import Fakten from 'components/home/Fakten'
+import Hero from 'components/home/Hero'
+import Leistungen from 'components/home/Leistungen'
+import Referenzen from 'components/home/Referenzen'
+import Team from 'components/home/Team'
+import Testimonials from 'components/home/Testimonials'
+import Layout from 'components/Layout'
+import { getHome } from 'lib/api'
+import { GetStaticProps } from 'next'
+import Head from 'next/head'
+import { useQuerySubscription } from 'react-datocms'
 
-const PreviewIndexPage = lazy(() => import('components/PreviewIndexPage'))
+export const getStaticProps: GetStaticProps = async ({
+  params,
+  preview = false,
+}) => {
+  const project = await getHome(preview)
 
-export const getStaticProps: GetStaticProps<
-  {
-    preview: boolean
-    token: string | null
-    homepage: Homepage
-    posts: Post[]
-    leistungen: Leistung[]
-    settings: Settings
-  },
-  any,
-  { token?: string }
-> = async ({ preview = false, previewData = {} }) => {
-  /* check if the project id has been defined by fetching the vercel envs */
-  if (projectId) {
-    const token = previewData?.token || null
-    const client = createClient({
-      projectId,
-      dataset,
-      apiVersion,
-      useCdn: preview,
-    })
-    const postsPromise = client.fetch<Post[]>(indexQuery)
-    const leistungenPromise = client.fetch<Leistung[]>(leistungenQuery)
-    const homepagePromise = client.fetch<Settings>(homepageQuery)
-    const settingsPromise = client.fetch<Settings>(settingsQuery)
-
-    return {
-      props: {
-        preview,
-        token,
-        posts: (await postsPromise) || [],
-        leistungen: (await leistungenPromise) || [],
-        homepage: (await homepagePromise) || {},
-        settings: (await settingsPromise) || {},
-      },
-      // If webhooks isn't setup then attempt to re-generate in 1 minute intervals
-      revalidate: process.env.SANITY_REVALIDATE_SECRET ? undefined : 60,
-    }
-  }
-
-  /* when the client isn't set up */
   return {
-    props: {
-      preview: false,
-      token: null,
-      homepage: {},
-      leistungen: [],
-      posts: [],
-      settings: {},
-    },
-    revalidate: undefined,
+    props: project,
+    revalidate: 30,
   }
 }
 
-export default function IndexRoute({
-  preview,
-  token,
-  homepage,
-  posts,
-  leistungen,
-  settings,
-}: InferGetStaticPropsType<typeof getStaticProps>) {
-  if (preview) {
-    return (
-      <PreviewSuspense
-        fallback={
-          <IndexPage
-            preview
-            loading
-            homepage={homepage}
-            posts={posts}
-            leistungen={leistungen}
-            settings={settings}
-          />
-        }
-      >
-        <PreviewIndexPage token={token} />
-      </PreviewSuspense>
-    )
+export default function IndexRoute({ subscription }) {
+  const { data, error, status } = useQuerySubscription(subscription)
+  const statusMessage = {
+    connecting: 'Connecting to DatoCMS...',
+    connected: 'Connected to DatoCMS, receiving live updates!',
+    closed: 'Connection closed',
   }
+  const { home } = data
+  const inhalt = data.home.inhalt
 
   return (
-    <IndexPage
-      homepage={homepage}
-      posts={posts}
-      leistungen={leistungen}
-      settings={settings}
-    />
+    <Layout>
+      {/* DatoCMS Live updates */}
+      {status != 'closed' && (
+        <div className="pb-8">
+          <p>Connection status: {statusMessage[status]}</p>
+          {error && (
+            <div>
+              <h1>Error: {error.code}</h1>
+              <div>{error.message}</div>
+              {error.response && (
+                <pre>{JSON.stringify(error.response, null, 2)}</pre>
+              )}
+            </div>
+          )}
+        </div>
+      )}
+      {/* <div className="grid grid-cols-1 [&>*]:border">
+        {inhalt.map((i) => {
+          return (
+            <div key={i.__typename}>
+              <h1>{i.__typename}</h1>
+            </div>
+          )
+        })}
+      </div> */}
+
+      <div className="">
+        {inhalt.map((i) => (
+          <div key={i.__typename}>{switchComponent(i)}</div>
+        ))}
+      </div>
+
+      {/* <pre>
+        <code>{JSON.stringify(data, null, 2)}</code>
+      </pre> */}
+    </Layout>
   )
+}
+
+const switchComponent = (i) => {
+  switch (i.__typename) {
+    case 'HeroRecord':
+      return <Hero />
+    case 'LeistungsektionRecord':
+      return <Leistungen />
+    case 'TeamsektionRecord':
+      return <Team />
+    case 'FaktensektionRecord':
+      return <Fakten />
+    case 'ProjektesektionRecord':
+      return <Referenzen />
+    case 'CtabreitRecord':
+      return <CTABreit />
+    case 'TestimonialsektionRecord':
+      return <Testimonials />
+    case 'BlogsektionRecord':
+      return <div className=""> BlogsektionRecord</div>
+    case 'KontaktsektionRecord':
+      return <Contact />
+
+    default:
+      return null
+  }
 }

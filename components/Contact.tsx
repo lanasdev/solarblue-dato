@@ -1,9 +1,8 @@
 // import SectionContainer from "components/SectionContainer";
-import cn from 'classnames'
 import Contactform from 'components/Contactform'
 import { Envelope, Phone } from 'phosphor-react'
 
-import Container from 'components/BlogContainer'
+import Container from 'components/Container'
 
 const Contact = () => {
   return (

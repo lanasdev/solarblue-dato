@@ -1,12 +1,12 @@
 import { useForm, ValidationError } from '@formspree/react'
-import cn from 'classnames'
+import clsx from 'clsx'
 
 const Contactform = () => {
   const [state, handleSubmit] = useForm(
     process.env.NEXT_PUBLIC_FORMSPREE || 'xwkzrzwy'
   )
 
-  const formInputClasses = cn(
+  const formInputClasses = clsx(
     'rounded-xl px-4 pb-3 text-black invalid:ring-red-500 placeholder:focus:italic focus:valid:ring-darkBlue'
   )
   // const formTextareaClasses =
@@ -36,7 +36,7 @@ const Contactform = () => {
               name="name"
               placeholder="Ihr Name"
               autoComplete="name"
-              className={cn('form-input ', formInputClasses)}
+              className={clsx('form-input ', formInputClasses)}
             />
             <ValidationError prefix="Name" field="name" errors={state.errors} />
           </fieldset>
@@ -50,7 +50,7 @@ const Contactform = () => {
               placeholder="Ihre Email"
               autoComplete="email"
               pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
-              className={cn('form-input ', formInputClasses)}
+              className={clsx('form-input ', formInputClasses)}
             />
             <ValidationError
               prefix="Email"
@@ -66,7 +66,7 @@ const Contactform = () => {
           <select
             name="type"
             id="type"
-            className={cn('form-select', formInputClasses)}
+            className={clsx('form-select', formInputClasses)}
           >
             <option value="Photovoltaik">Photovoltaik</option>
             <option value="Energiespeicher">Energiespeicher</option>
@@ -85,7 +85,7 @@ const Contactform = () => {
             name="message"
             placeholder="Ihre Nachricht an uns"
             minLength={4}
-            className={cn('form-textarea', formInputClasses)}
+            className={clsx('form-textarea', formInputClasses)}
           />
           <ValidationError
             prefix="Message"

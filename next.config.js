@@ -19,7 +19,7 @@ const securityHeaders = [
   },
 ]
 
-const config = {
+module.exports = {
   swcMinify: false,
   // reactStrictMode: true,
   images: {
@@ -40,5 +40,3 @@ const config = {
     ]
   },
 }
-
-export default config

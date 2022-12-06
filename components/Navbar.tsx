@@ -1,6 +1,6 @@
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 // import Logo from "../components/Logo";
-import cn from 'classnames'
+import clsx from 'clsx'
 import Image from 'next/image'
 import Link from 'next/link'
 import { withRouter } from 'next/router'
@@ -54,7 +54,7 @@ const Navbar = ({ router }) => {
                       <Link
                         key={item.name}
                         href={item.href}
-                        className={cn(
+                        className={clsx(
                           item.href == path || item.href2 == path
                             ? 'decoration-yellow border-b-2 border-b-darkBlue  hover:bg-black/10'
                             : 'decoration-2 underline-offset-2 hover:border-b-2 hover:border-b-lightBlue hover:bg-black/10',
@@ -104,7 +104,7 @@ const Navbar = ({ router }) => {
                     as="a"
                     href={item.href}
                     //  if href or href2 is equal to path, then add underline
-                    className={cn(
+                    className={clsx(
                       item.href == path || item.href2 == path
                         ? 'bg-black text-white '
                         : 'hover:text-white',
@@ -130,10 +130,10 @@ const CallToActionNav = () => {
   return (
     <Link href="#kontakt" className=" cursor-pointer">
       <span
-        className="hover:bg-yellow hidden w-[11em]  items-center justify-center rounded-lg bg-black px-4 py-2 font-medium text-white md:flex"
+        className="hover:bg-yellow hidden w-32  items-center justify-center rounded-lg bg-black px-4 py-2 font-medium text-white md:flex"
         aria-label="Angebot anfragen"
       >
-        Angebot anfragen
+        Kontakt
       </span>
       <span
         className="hover:bg-yellow flex items-center justify-center rounded-lg bg-black px-4 py-2 font-medium text-white md:hidden"

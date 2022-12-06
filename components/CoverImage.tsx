@@ -1,41 +1,37 @@
-import cn from 'classnames'
-import { urlForImage } from 'lib/sanity.image'
-import Image from 'next/image'
+/* eslint-disable jsx-a11y/alt-text */
+import clsx from 'clsx'
 import Link from 'next/link'
+import { Image, ResponsiveImageType } from 'react-datocms'
 
 interface CoverImageProps {
-  title: string
+  data: ResponsiveImageType
   slug?: string
   image: any
   priority?: boolean
 }
 
 export default function CoverImage(props: CoverImageProps) {
-  const { title, slug, image: source, priority } = props
-  const image = source?.asset?._ref ? (
+  const { data, slug, image, priority } = props
+
+  const ThisImage = () => (
     <div
-      className={cn('shadow-small', {
+      className={clsx('shadow-small', {
         'transition-shadow duration-200 hover:shadow-medium': slug,
       })}
     >
       <Image
         className="h-auto w-full"
-        width={2000}
-        height={1000}
-        alt={`Cover Image for ${title}`}
-        src={urlForImage(source).height(1000).width(2000).url()}
+        data={data}
         sizes="100vw"
         priority={priority}
       />
     </div>
-  ) : (
-    <div style={{ paddingTop: '50%', backgroundColor: '#ddd' }} />
   )
 
   return (
     <div className="sm:mx-0">
       {slug ? (
-        <Link href={`/posts/${slug}`} aria-label={title}>
+        <Link href={`/posts/${slug}`} aria-label={slug}>
           {image}
         </Link>
       ) : (

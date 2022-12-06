@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { InstagramLogo, TwitterLogo, YoutubeLogo } from 'phosphor-react'
-import Container from 'components/BlogContainer'
+import Container from 'components/Container'
 
 const Footer = () => {
   return (
