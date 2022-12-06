@@ -1,10 +1,10 @@
 /* eslint-disable jsx-a11y/alt-text */
-import { Image } from 'react-datocms'
+import clsx from 'clsx'
 import Avatar from 'components/AuthorAvatar'
+import Container from 'components/Container'
 import CoverImage from 'components/CoverImage'
 import Link from 'next/link'
-import Container from 'components/Container'
-import clsx from 'clsx'
+import { Image } from 'react-datocms'
 
 export default function Blog({ blogData }) {
   return (
@@ -24,9 +24,9 @@ export default function Blog({ blogData }) {
             {blogData.beschreibung || 'Hier finden Sie unsere neusten Beiträge'}
           </p>
         </aside>
-        <div className="grid flex-[3] grid-cols-1 gap-8 md:grid-cols-2">
-          {blogData.blogliste.map((post) => (
-            <BlogItem post={post} key={post.slug} />
+        <div className="grid flex-[3] grid-cols-1 gap-x-8 gap-y-12 md:grid-cols-2">
+          {blogData.blogliste.slice(0, 3).map((post, index) => (
+            <BlogItem post={post} key={post.slug} index={index} />
           ))}
         </div>
       </div>
@@ -35,9 +35,9 @@ export default function Blog({ blogData }) {
   )
 }
 
-export function BlogItem({ post }) {
+export function BlogItem({ post, index }) {
   return (
-    <div className="group">
+    <div className={clsx('group', index == 2 && 'md:col-start-1 md:col-end-3')}>
       <div className="mb-5">
         <div className="sm:mx-0">
           {post.href ? (

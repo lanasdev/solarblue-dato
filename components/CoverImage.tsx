@@ -19,9 +19,9 @@ export default function CoverImage(props: CoverImageProps) {
       })}
     >
       <Image
-        className="h-auto w-full"
+        className="h-64 w-full"
+        objectFit="cover"
         data={image}
-        sizes="100vw"
         priority={priority}
       />
     </div>

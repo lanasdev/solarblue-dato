@@ -5,7 +5,7 @@ const CTABreit = ({ ctabreitData }) => {
   return (
     <Container>
       <Link
-        href={'/projekte'}
+        href={'/#kontakt'}
         className="h-92 group my-4 flex items-center justify-center rounded bg-gradient-to-t from-darkBlue to-lightBlue py-4 text-center text-white  transition duration-200 hover:rounded-none hover:shadow-medium "
       >
         <div className="p-4 group-hover:underline">
