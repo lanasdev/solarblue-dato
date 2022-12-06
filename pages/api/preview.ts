@@ -1,9 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-
 // type Data = {
 //     name: string;
 // };
-
 import url from 'url'
 
 const previewHandler = async (req: NextApiRequest, res: NextApiResponse) => {
