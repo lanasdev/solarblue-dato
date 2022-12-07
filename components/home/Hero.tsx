@@ -26,16 +26,16 @@ const Hero = ({ heroData }) => {
         objectFit="cover"
         priority={true}
       />
-      <div className="absolute top-24 left-5 flex max-w-md flex-col  md:left-16 md:max-w-2xl">
-        <h1 className="pb-4 text-4xl font-semibold text-white md:text-7xl md:leading-[5.4rem]">
+      <div className="absolute top-24 left-5 flex max-w-md flex-col md:top-1/2 md:left-1/2 md:max-w-none  md:-translate-y-1/2 md:-translate-x-1/2  md:transform md:items-center">
+        <h1 className="pb-4 text-4xl font-semibold text-white md:max-w-none md:text-center md:text-7xl md:leading-[5.4rem]">
           {titel}
         </h1>
-        <p className="max-w-xs pb-16 text-white md:max-w-xl md:text-4xl md:leading-normal">
+        <p className="max-w-xs pb-16 text-white md:max-w-4xl md:text-center md:text-4xl md:leading-normal">
           {untertitel}
         </p>
         <Link
-          href={ctaLink ? ctaLink : '/'}
-          className="flex max-w-fit justify-center rounded-lg border-2 border-white px-4 py-4 font-semibold text-white backdrop-blur-xl transition hover:bg-white  hover:text-darkBlue md:max-w-xs "
+          href={ctaLink ? ctaLink : '/#leistungen'}
+          className="flex max-w-fit justify-center rounded-lg border-2 border-white px-4 py-4 font-semibold text-white backdrop-blur-xl transition hover:bg-white  hover:text-darkBlue md:max-w-lg "
         >
           {cta ? cta : 'Mehr erfahren'}
         </Link>

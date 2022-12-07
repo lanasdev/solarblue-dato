@@ -1,7 +1,13 @@
 // import SectionContainer from "components/SectionContainer";
 import Contactform from 'components/Contactform'
 import Container from 'components/Container'
+import dynamic from 'next/dynamic'
 import { Envelope, Phone } from 'phosphor-react'
+import { Suspense } from 'react'
+
+const DynamicContactform = dynamic(() => import('components/Contactform'), {
+  ssr: false,
+})
 
 const Contact = ({ contactData }) => {
   return (
@@ -37,7 +43,9 @@ const Contact = ({ contactData }) => {
             </div>
           </div>
           <hr className="my-16 border-white" />
-          <Contactform />
+          <Suspense fallback={<div>Loading...</div>}>
+            <DynamicContactform />
+          </Suspense>
         </div>
       </Container>
     </div>
