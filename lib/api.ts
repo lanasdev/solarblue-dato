@@ -9,7 +9,35 @@ const API_TOKEN = process.env.DATOCMS_API_TOKEN
 export const getHome = async (preview: boolean) => {
   const HomeQuery = gql`
     query HomeQuery {
+      site: _site {
+        favicon: faviconMetaTags {
+          attributes
+          content
+          tag
+        }
+        globalSeo {
+          siteName
+          titleSuffix
+          twitterAccount
+          facebookPageUrl
+          fallbackSeo {
+            description
+            title
+            twitterCard
+            image {
+              responsiveImage(imgixParams: { auto: format }) {
+                ...responsiveImageFragment
+              }
+            }
+          }
+        }
+      }
       home {
+        seo: _seoMetaTags {
+          attributes
+          content
+          tag
+        }
         inhalt {
           __typename
           ... on HeroRecord {
@@ -114,6 +142,13 @@ export const getHome = async (preview: boolean) => {
                 ...responsiveImageFragment
               }
             }
+          }
+        }
+      }
+      einstellungen {
+        logo {
+          responsiveImage(imgixParams: { auto: format }) {
+            ...responsiveImageFragment
           }
         }
       }

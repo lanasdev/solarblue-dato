@@ -7,7 +7,7 @@ const Contactform = () => {
   )
 
   const formInputClasses = clsx(
-    'rounded-xl px-4 pb-3 text-black invalid:ring-red-500 placeholder:focus:italic focus:valid:ring-darkBlue'
+    'rounded-md px-4 pb-3 text-black invalid:ring-red-500 placeholder:focus:italic focus:valid:ring-darkBlue'
   )
   // const formTextareaClasses =
   //   'mb-4 rounded-xl pt-3 pb-12 text-black placeholder:focus:italic focus:valid:ring-darkBlue focus:invalid:ring-red-500'

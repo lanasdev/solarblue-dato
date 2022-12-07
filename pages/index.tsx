@@ -12,7 +12,7 @@ import Layout from 'components/Layout'
 import { getHome } from 'lib/api'
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
-import { useQuerySubscription } from 'react-datocms'
+import { renderMetaTags, useQuerySubscription } from 'react-datocms'
 
 export const getStaticProps: GetStaticProps = async ({
   params,
@@ -38,6 +38,7 @@ export default function IndexRoute({ subscription }) {
 
   return (
     <Layout>
+      <Head>{renderMetaTags(data.home.seo.concat(data.site.favicon))}</Head>
       {/* DatoCMS Live updates */}
       {status != 'closed' && (
         <div className="pb-8">

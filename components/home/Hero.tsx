@@ -22,6 +22,8 @@ const Hero = ({ heroData }) => {
       <Image
         data={bild.responsiveImage}
         className="h-[90vh] w-full object-cover object-center "
+        layout="responsive"
+        objectFit="cover"
         priority={true}
       />
       <div className="absolute top-24 left-5 flex max-w-md flex-col  md:left-16 md:max-w-2xl">

@@ -5,7 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { withRouter } from 'next/router'
 import { List, Phone, X } from 'phosphor-react'
-import ImgLogo from 'public/img/logo-hofmann.jpeg'
+import ImgLogo from 'img/LogoSolarblue.png'
 import { Fragment } from 'react'
 
 const navigation = [
@@ -35,18 +35,12 @@ const Navbar = ({ router }) => {
             <div className="relative flex h-16 items-center justify-between">
               <div className="flex flex-1 items-center justify-start sm:items-center sm:justify-between">
                 <Link href="/" className="flex flex-shrink-0 items-center">
-                  <Image
-                    className="block h-10 w-auto lg:hidden"
-                    src={ImgLogo}
-                    height="50"
-                    alt="Volker Voltaik"
-                  />
-                  <Image
-                    className="hidden h-10 w-auto lg:block"
-                    src={ImgLogo}
-                    height="50"
-                    alt="Volker Voltaik"
-                  />
+                  <span className="flex h-16 w-auto items-center justify-center text-2xl font-semibold text-darkBlue">
+                    Solarblue
+                  </span>
+                  {/* <span className="hidden h-16 w-auto text-2xl font-semibold text-darkBlue lg:block">
+                    Solarblue
+                  </span> */}
                 </Link>
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">

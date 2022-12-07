@@ -15,7 +15,7 @@ export default function Blog({ blogData }) {
           href={'/blog'}
           className="float-right underline hover:text-lightBlue hover:no-underline"
         >
-          Mehr vom Blog anzeigen
+          Mehr Beiträge anzeigen
         </Link>
       </div>
       <div className="flex flex-col gap-16 md:flex-row">
@@ -30,7 +30,6 @@ export default function Blog({ blogData }) {
           ))}
         </div>
       </div>
-      <pre>{/* <code>{JSON.stringify(blogData, null, 2)}</code> */}</pre>
     </Container>
   )
 }
@@ -39,6 +38,7 @@ export function BlogItem({ post, index }) {
   return (
     <div className={clsx('group', index == 2 && 'md:col-start-1 md:col-end-3')}>
       <div className="mb-5">
+        {/* TODO: Link them in a correct way */}
         <div className="sm:mx-0">
           {post.href ? (
             <CoverImage
@@ -50,7 +50,7 @@ export function BlogItem({ post, index }) {
           )}
         </div>
       </div>
-      <h3 className="mb-3 text-2xl font-semibold">
+      <h3 className="font-regular mb-3 text-xl font-medium">
         <Link href={`/blog/${post.href}`} className="group-hover:underline">
           {post.titel}
         </Link>
@@ -59,7 +59,7 @@ export function BlogItem({ post, index }) {
         <Date dateString={date} />
       </div> */}
       {post.beschreibung && (
-        <p className="mb-4 text-lg leading-relaxed line-clamp-3">
+        <p className="text-md mb-4 leading-relaxed line-clamp-3">
           {post.beschreibung}
         </p>
       )}
