@@ -1,11 +1,11 @@
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 // import Logo from "../components/Logo";
 import clsx from 'clsx'
+import ImgLogo from 'img/LogoSolarblue.png'
 import Image from 'next/image'
 import Link from 'next/link'
 import { withRouter } from 'next/router'
 import { List, Phone, X } from 'phosphor-react'
-import ImgLogo from 'img/LogoSolarblue.png'
 import { Fragment } from 'react'
 
 const navigation = [

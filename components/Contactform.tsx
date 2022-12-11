@@ -85,6 +85,7 @@ const Contactform = () => {
             name="message"
             placeholder="Ihre Nachricht an uns"
             minLength={4}
+            rows={4}
             className={clsx('form-textarea', formInputClasses)}
           />
           <ValidationError

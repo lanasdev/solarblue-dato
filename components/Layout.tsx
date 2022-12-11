@@ -3,6 +3,7 @@ import Navbar from 'components/Navbar'
 import Head from 'next/head'
 import { ReactNode } from 'react'
 
+import Contact from './Contact'
 import Footer from './Footer'
 import MetaTags from './MetaTags'
 

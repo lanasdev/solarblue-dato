@@ -26,7 +26,7 @@ const Hero = ({ heroData }) => {
         objectFit="cover"
         priority={true}
       />
-      <div className="absolute top-24 left-5 flex max-w-md flex-col md:top-1/2 md:left-1/2 md:max-w-none  md:-translate-y-1/2 md:-translate-x-1/2  md:transform md:items-center">
+      <div className="absolute top-24 left-5 flex max-w-md flex-col px-5 md:top-1/2 md:left-1/2 md:max-w-none  md:-translate-y-1/2 md:-translate-x-1/2  md:transform md:items-center">
         <h1 className="pb-4 text-4xl font-semibold text-white md:max-w-none md:text-center md:text-7xl md:leading-[5.4rem]">
           {titel}
         </h1>

@@ -176,3 +176,137 @@ export const getHome = async (preview: boolean) => {
         },
   }
 }
+
+export const getAllProjects = async (preview: boolean) => {
+  const AllProjectsQuery = gql`
+    query AllProjectsQuery {
+      allProjekts(orderBy: _firstPublishedAt_DESC) {
+        slug
+      }
+    }
+  `
+  const graphqlRequest = {
+    query: AllProjectsQuery,
+    variables: {},
+    includeDrafts: preview,
+    excludeInvalid: true,
+  }
+  const data = await request(graphqlRequest)
+
+  return data.allProjekts
+}
+
+export const getProjectBySlug = async (slug: string, preview: boolean) => {
+  const ProjectBySlugQuery = gql`
+    query ProjectBySlugQuery($slug: String!) {
+      site: _site {
+        favicon: faviconMetaTags {
+          attributes
+          content
+          tag
+        }
+        globalSeo {
+          siteName
+          titleSuffix
+          twitterAccount
+          facebookPageUrl
+          fallbackSeo {
+            description
+            title
+            twitterCard
+            image {
+              responsiveImage(imgixParams: { auto: format }) {
+                ...responsiveImageFragment
+              }
+            }
+          }
+        }
+      }
+      projekt(filter: { slug: { eq: $slug } }) {
+        slug
+        createdAt
+        titel
+        beschreibung
+        typ {
+          slug
+          titel
+          icon
+        }
+        text {
+          blocks
+          links
+          value
+        }
+        koordinaten {
+          latitude
+          longitude
+        }
+        bild {
+          responsiveImage(imgixParams: { auto: format }) {
+            ...responsiveImageFragment
+          }
+        }
+        projektstart
+        ortsname
+        kwp
+        stromersparnisprojahr
+        zeitraum {
+          start
+          ende
+        }
+
+        gallerie {
+          responsiveImage(imgixParams: { auto: format }) {
+            ...responsiveImageFragment
+          }
+        }
+        seo: _seoMetaTags {
+          attributes
+          content
+          tag
+        }
+      }
+      home {
+        inhalt {
+          __typename
+          ... on KontaktsektionRecord {
+            id
+            titel
+            beschreibung
+            gallerie {
+              responsiveImage(imgixParams: { auto: format }) {
+                ...responsiveImageFragment
+              }
+            }
+          }
+        }
+      }
+      einstellungen {
+        logo {
+          responsiveImage(imgixParams: { auto: format }) {
+            ...responsiveImageFragment
+          }
+        }
+      }
+    }
+    ${responsiveImageFragment}
+  `
+  const graphqlRequest = {
+    query: ProjectBySlugQuery,
+    variables: { slug },
+    includeDrafts: preview,
+    excludeInvalid: true,
+  }
+  return {
+    subscription: preview
+      ? {
+          ...graphqlRequest,
+          initialData: await request(graphqlRequest),
+          token: process.env.NEXT_DATOCMS_API_TOKEN,
+        }
+      : {
+          enabled: false,
+          initialData: await request(graphqlRequest),
+        },
+  }
+}

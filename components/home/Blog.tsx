@@ -36,24 +36,28 @@ export default function Blog({ blogData }) {
 
 export function BlogItem({ post, index }) {
   return (
-    <div className={clsx('group', index == 2 && 'md:col-start-1 md:col-end-3')}>
+    <Link
+      href={`/blog/${post.slug}`}
+      className={clsx(
+        'group cursor-pointer',
+        index == 2 && 'md:col-start-1 md:col-end-3'
+      )}
+    >
       <div className="mb-5">
         {/* TODO: Link them in a correct way */}
         <div className="sm:mx-0">
           {post.href ? (
             <CoverImage
               image={post.bild.responsiveImage}
-              href={`/blog/${post.href}`}
+              href={`/blog/${post.slug}`}
             />
           ) : (
             <CoverImage image={post.bild.responsiveImage} />
           )}
         </div>
       </div>
-      <h3 className="font-regular mb-3 text-xl font-medium">
-        <Link href={`/blog/${post.href}`} className="group-hover:underline">
-          {post.titel}
-        </Link>
+      <h3 className="font-regular mb-3 text-xl font-medium group-hover:underline">
+        <>{post.titel}</>
       </h3>
       {/* <div className="mb-4 text-lg">
         <Date dateString={date} />
@@ -67,6 +71,7 @@ export function BlogItem({ post, index }) {
         Mehr erfahren
       </span>
       {/* {author && <Avatar name={author.name} picture={author.picture} />} */}
-    </div>
+      {/* <pre>{JSON.stringify(post, null, 2)}</pre> */}
+    </Link>
   )
 }
