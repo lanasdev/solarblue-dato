@@ -95,7 +95,7 @@ export default function Project({ subscription }) {
             </>
           )}
         </Container>
-        <pre className="pt-32">{JSON.stringify(projekt, null, 2)}</pre>
+        {/* <pre className="pt-32">{JSON.stringify(projekt, null, 2)}</pre> */}
       </div>
       <>
         {home.inhalt

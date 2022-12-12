@@ -1,6 +1,6 @@
 # Solarblue
 
-A blue Page for the solar industry
+A blue themed website for the solar industry
 
 ## Installation
 
@@ -20,3 +20,10 @@ A blue Page for the solar industry
 - [] Better Hero
 - [] Image Gallery to Contact Section
 - [] Add About us page
+
+## Tech Stack
+
+- [Next.js](https://nextjs.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [DatoCMS](https://www.datocms.com/)
+- [Vercel](https://vercel.com/)
