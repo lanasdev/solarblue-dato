@@ -26,4 +26,5 @@ A blue themed website for the solar industry
 - [Next.js](https://nextjs.org/)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [DatoCMS](https://www.datocms.com/)
+- [Turbo](https://turbo.build/)
 - [Vercel](https://vercel.com/)
