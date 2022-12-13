@@ -151,6 +151,14 @@ export const getHome = async (preview: boolean) => {
             ...responsiveImageFragment
           }
         }
+        social {
+          email
+          telefonnummer
+          adresse
+          instagram
+          twitter
+          youtube
+        }
       }
     }
     ${responsiveImageFragment}

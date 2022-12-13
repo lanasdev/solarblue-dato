@@ -50,9 +50,9 @@ const Navbar = ({ router }) => {
                         href={item.href}
                         className={clsx(
                           item.href == path || item.href2 == path
-                            ? 'decoration-yellow border-b-2 border-b-darkBlue  hover:bg-black/10'
+                            ? ' border-b-2 border-b-darkBlue  hover:bg-black/10 '
                             : 'decoration-2 underline-offset-2 hover:border-b-2 hover:border-b-lightBlue hover:bg-black/10',
-                          'px-[20px] py-[10px] font-medium text-black'
+                          'rounded-sm px-[20px] py-[10px] font-medium text-black transition-all duration-150 ease-in-out'
                         )}
                         aria-current={item.href == path ? 'page' : undefined}
                       >
@@ -101,8 +101,8 @@ const Navbar = ({ router }) => {
                     className={clsx(
                       item.href == path || item.href2 == path
                         ? 'bg-black text-white '
-                        : 'hover:text-white',
-                      'hover:bg-yellow block rounded-md px-3 py-2 text-base font-medium transition-all duration-75'
+                        : 'hover:bg-black/10 hover:text-black',
+                      'block rounded-md px-3 py-2 text-base font-medium transition-all duration-75 hover:bg-darkBlue'
                     )}
                     aria-current={item.href == path ? 'page' : undefined}
                   >
@@ -110,6 +110,13 @@ const Navbar = ({ router }) => {
                   </Disclosure.Button>
                 ))}
               </div>
+              {/* <div className="px-5 py-16 sm:hidden">
+                <span className="text-2xl">Kontakt</span>
+                <Disclosure.Button className=" mt-8 flex items-center justify-center rounded-lg  transition-colors duration-150 ease-in-out  ">
+                  <Phone size={32} className="inline-block" />
+                  <span className="pl-2 text-sm ">Jetzt Anrufen</span>
+                </Disclosure.Button>
+              </div> */}
             </Disclosure.Panel>
           </Transition>
         </>
@@ -122,19 +129,15 @@ export default withRouter(Navbar)
 
 const CallToActionNav = () => {
   return (
-    <Link href="#kontakt" className=" cursor-pointer">
-      <span
-        className="hover:bg-yellow hidden w-32  items-center justify-center rounded-lg bg-black px-4 py-2 font-medium text-white md:flex"
-        aria-label="Angebot anfragen"
-      >
-        Kontakt
-      </span>
-      <span
-        className="hover:bg-yellow flex items-center justify-center rounded-lg bg-black px-4 py-2 font-medium text-white md:hidden"
-        aria-label="Angebot anfragen"
-      >
-        <Phone size={32} />
-      </span>
+    <Link
+      href="#kontakt"
+      className=" flex cursor-pointer items-center justify-center rounded-lg bg-black px-4  py-3 text-base font-medium text-white transition-colors duration-150 ease-in-out hover:bg-darkBlue "
+      aria-label="Angebot anfragen"
+    >
+      <span className="text-sm font-semibold ">Kontakt</span>
+      <Phone size={32} className="inline-block md:hidden" />
     </Link>
   )
 }
+
+//

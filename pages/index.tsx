@@ -1,6 +1,7 @@
 import Contact from 'components/Contact'
 import Container from 'components/Container'
 import Blog from 'components/home/Blog'
+import ContactCard from 'components/home/ContactCard'
 import CTABreit from 'components/home/CTABreit'
 import Fakten from 'components/home/Fakten'
 import Hero from 'components/home/Hero'
@@ -33,8 +34,34 @@ export default function IndexRoute({ subscription }) {
     connected: 'Connected to DatoCMS, receiving live updates!',
     closed: 'Connection closed',
   }
-  const { home } = data
+  const { home, einstellungen } = data
   const inhalt = data.home.inhalt
+
+  const switchComponent = (i) => {
+    switch (i.__typename) {
+      case 'HeroRecord':
+        return <Hero heroData={i} social={einstellungen.social[0]} />
+      case 'LeistungsektionRecord':
+        return <Leistungen leistungenData={i} />
+      case 'TeamsektionRecord':
+        return <Team teamData={i} />
+      case 'FaktensektionRecord':
+        return <Fakten faktenData={i} />
+      case 'ProjektesektionRecord':
+        return <Referenzen referenzenData={i} />
+      case 'CtabreitRecord':
+        return <CTABreit ctabreitData={i} />
+      case 'TestimonialsektionRecord':
+        return <Testimonials testimonialsData={i} />
+      case 'BlogsektionRecord':
+        return <Blog blogData={i} />
+      case 'KontaktsektionRecord':
+        return <Contact contactData={i} />
+
+      default:
+        return null
+    }
+  }
 
   return (
     <Layout>
@@ -54,51 +81,12 @@ export default function IndexRoute({ subscription }) {
           )}
         </div>
       )}
-      {/* <div className="grid grid-cols-1 [&>*]:border">
-        {inhalt.map((i) => {
-          return (
-            <div key={i.__typename}>
-              <h1>{i.__typename}</h1>
-            </div>
-          )
-        })}
-      </div> */}
 
       <div className="">
         {inhalt.map((i) => (
           <div key={i.__typename}>{switchComponent(i)}</div>
         ))}
       </div>
-      {/* 
-      <pre>
-        <code>{JSON.stringify(data, null, 2)}</code>
-      </pre> */}
     </Layout>
   )
-}
-
-const switchComponent = (i) => {
-  switch (i.__typename) {
-    case 'HeroRecord':
-      return <Hero heroData={i} />
-    case 'LeistungsektionRecord':
-      return <Leistungen leistungenData={i} />
-    case 'TeamsektionRecord':
-      return <Team teamData={i} />
-    case 'FaktensektionRecord':
-      return <Fakten faktenData={i} />
-    case 'ProjektesektionRecord':
-      return <Referenzen referenzenData={i} />
-    case 'CtabreitRecord':
-      return <CTABreit ctabreitData={i} />
-    case 'TestimonialsektionRecord':
-      return <Testimonials testimonialsData={i} />
-    case 'BlogsektionRecord':
-      return <Blog blogData={i} />
-    case 'KontaktsektionRecord':
-      return <Contact contactData={i} />
-
-    default:
-      return null
-  }
 }

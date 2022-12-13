@@ -21,7 +21,7 @@ const Referenzen = ({ referenzenData }) => {
           <h3 className="text-2xl font-semibold">{referenzenData.titel}</h3>
           <Link
             href={'/projekte'}
-            className="float-right underline hover:text-lightBlue hover:no-underline"
+            className="float-right pl-4 underline hover:text-lightBlue hover:no-underline"
           >
             Mehr Referenzen anzeigen
           </Link>
