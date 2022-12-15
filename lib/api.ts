@@ -185,6 +185,138 @@ export const getHome = async (preview: boolean) => {
   }
 }
 
+// Leistungen
+
+export const getAllLeistungen = async (preview: boolean) => {
+  const AllLeistungenQuery = gql`
+    query AllLeistungenQuery {
+      allLeistungs {
+        slug
+      }
+    }
+  `
+  const graphqlRequest = {
+    query: AllLeistungenQuery,
+    variables: {},
+    includeDrafts: preview,
+    excludeInvalid: true,
+  }
+
+  const data = await request(graphqlRequest)
+
+  return data.allLeistungs
+}
+
+export const getLeistungBySlug = async (slug: string, preview: boolean) => {
+  const LeistungBySlugQuery = gql`
+    query LeistungBySlugQuery($slug: String!) {
+      site: _site {
+        favicon: faviconMetaTags {
+          attributes
+          content
+          tag
+        }
+        globalSeo {
+          siteName
+          titleSuffix
+          twitterAccount
+          facebookPageUrl
+          fallbackSeo {
+            description
+            title
+            twitterCard
+            image {
+              responsiveImage(imgixParams: { auto: format }) {
+                ...responsiveImageFragment
+              }
+            }
+          }
+        }
+      }
+      leistung(filter: { slug: { eq: $slug } }) {
+        slug
+        titel
+        beschreibung
+        icon
+        text {
+          blocks
+          links
+          value
+        }
+        bild {
+          responsiveImage(imgixParams: { auto: format }) {
+            ...responsiveImageFragment
+          }
+        }
+        projekte {
+          slug
+          titel
+          beschreibung
+          zeitraum {
+            start
+            ende
+          }
+          ortsname
+          bild {
+            responsiveImage(imgixParams: { auto: format }) {
+              ...responsiveImageFragment
+            }
+          }
+        }
+        seo: _seoMetaTags {
+          attributes
+          content
+          tag
+        }
+      }
+      home {
+        inhalt {
+          __typename
+          ... on KontaktsektionRecord {
+            id
+            titel
+            beschreibung
+            gallerie {
+              responsiveImage(imgixParams: { auto: format }) {
+                ...responsiveImageFragment
+              }
+            }
+          }
+        }
+      }
+      einstellungen {
+        logo {
+          responsiveImage(imgixParams: { auto: format }) {
+            ...responsiveImageFragment
+          }
+        }
+      }
+    }
+    ${responsiveImageFragment}
+  `
+  const graphqlRequest = {
+    query: LeistungBySlugQuery,
+    variables: { slug },
+    includeDrafts: preview,
+    excludeInvalid: true,
+  }
+
+  return {
+    subscription: preview
+      ? {
+          ...graphqlRequest,
+          initialData: await request(graphqlRequest),
+          token: process.env.NEXT_DATOCMS_API_TOKEN,
+        }
+      : {
+          enabled: false,
+          initialData: await request(graphqlRequest),
+        },
+  }
+}
+
+// Projects
+
 export const getAllProjects = async (preview: boolean) => {
   const AllProjectsQuery = gql`
     query AllProjectsQuery {

@@ -33,9 +33,9 @@ const Hero = ({ heroData, social }) => {
           <h1 className="pb-4 text-4xl font-semibold text-white md:max-w-none md:text-center md:text-7xl md:leading-[5.4rem]">
             {titel}
           </h1>
-          <p className="max-w-xs pb-16 text-white md:max-w-4xl md:text-center md:text-4xl md:leading-normal">
+          <h2 className="max-w-xs pb-16 text-white md:max-w-4xl md:text-center md:text-4xl md:leading-normal">
             {untertitel}
-          </p>
+          </h2>
           <Link
             href={ctaLink ? ctaLink : '/#leistungen'}
             className="flex max-w-fit justify-center rounded-lg border-2 border-white px-4 py-4 font-semibold text-white backdrop-blur-xl transition hover:bg-white  hover:text-darkBlue md:max-w-lg "
